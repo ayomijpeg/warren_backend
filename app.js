@@ -10,6 +10,7 @@ import cors from "cors";
 import ErrorHandler from "./utils/ErrorHandler.js";
 import AppError from "./utils/AppError.js";
 import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use(hpp());
 
 // Route handlers
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
    res.send("Hello World!");

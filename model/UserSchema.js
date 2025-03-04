@@ -15,16 +15,6 @@ const UserSchema = mongoose.Schema({
          trim: true,
       },
    },
-   // username: {
-   //    type: String,
-   //    required: [true, "Please enter your username"],
-   //    unique: true,
-   //    trim: true,
-   //    validate: {
-   //       validator: (value) => validator.isAlphanumeric(value),
-   //       message: "Username must contain only letters and numbers",
-   //    },
-   // },
    email: {
       type: String,
       required: [true, "Please enter your email"],
@@ -40,16 +30,6 @@ const UserSchema = mongoose.Schema({
       minlength: [8, "Password must be at least 8 characters long"],
       select: false,
    },
-   // confirmPassword: {
-   //    type: String,
-   //    required: [true, "Please confirm your password"],
-   //    validate: {
-   //       validator: function (value) {
-   //          return this.password === value;
-   //       },
-   //       message: "Passwords do not match",
-   //    },
-   // },
    gender: {
       type: String,
       enum: ["male", "female", "rather not say"],
