@@ -5,6 +5,7 @@ import mongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
 import helmet from "helmet";
 import cors from "cors";
+import hbs from "hbs";
 
 // Local Modules
 import ErrorHandler from "./utils/ErrorHandler.js";
@@ -21,12 +22,15 @@ const limiter = rateLimit({
    message: "Too many requests, try again in 1 hour",
 });
 
+app.set("view engine","hbs");
 // limits the size of the data that can be sent in a request
 app.use(
    express.json({
       limit: "1mb",
    })
 );
+app.use(express.static("Public"));
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
@@ -44,12 +48,17 @@ app.use(mongoSanitize());
 // Preventing parameter pollution
 app.use(hpp());
 
+// register default values for template
+hbs.registerHelper("default", function (value, defaultValue) {
+   return value || defaultValue;
+});
+
 // Route handlers
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
-   res.send("Hello World!");
+   res.render("index");
 });
 
 // Handling unhandled routes
