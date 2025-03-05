@@ -22,7 +22,7 @@ const limiter = rateLimit({
    message: "Too many requests, try again in 1 hour",
 });
 
-app.set("view engine","hbs");
+app.set("view engine", "hbs");
 // limits the size of the data that can be sent in a request
 app.use(
    express.json({
@@ -59,6 +59,37 @@ app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
    res.render("index");
+});
+
+app.get("/dashboard", (req, res) => {
+   res.render("dashboard");
+});
+app.get("/admin/dashboard", (req, res) => {
+   res.render("admin-dashboard");
+});
+app.get("/admin", (req, res) => {
+   res.render("admin-login");
+});
+app.get("/confirm", (req, res) => {
+   res.render("confirm");
+});
+app.get("/invest", (req, res) => {
+   res.render("invest");
+});
+app.get("/login", (req, res) => {
+   res.render("login");
+});
+app.get("/payment", (req, res) => {
+   res.render("payment");
+});
+app.get("/profile", (req, res) => {
+   res.render("profile");
+});
+app.get("/signup", (req, res) => {
+   res.render("signup");
+});
+app.get("/transaction", (req, res) => {
+   res.render("transaction");
 });
 
 // Handling unhandled routes
