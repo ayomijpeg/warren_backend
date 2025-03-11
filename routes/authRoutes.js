@@ -1,7 +1,7 @@
 import express from "express";
 
 // Local Modules
-import { signup, login, protect } from "../controller/authController.js";
+import { signup, login, protect, authorize } from "../controller/authController.js";
 
 const router = express.Router();
 
