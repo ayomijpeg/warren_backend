@@ -7,7 +7,9 @@ import connectDB from "./model/DB.js";
 // Setup env variables
 config();
 
+// setInterval(() => {
 connectDB();
+// }, 24 * 60 * 60 * 1000);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
