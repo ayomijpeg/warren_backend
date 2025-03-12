@@ -11,7 +11,8 @@ import ErrorHandler from "./utils/ErrorHandler.js";
 import AppError from "./utils/AppError.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
-import { protect, authorize } from "./controller/authController.js";
+import investmentRoutes from "./routes/investmentRoutes.js";
+import investmentPlanRoutes from "./routes/investmentPlanRoutes.js";
 
 const app = express();
 
@@ -49,6 +50,8 @@ app.use(hpp());
 // Route handlers
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/plan", investmentPlanRoutes);
+app.use("/investment", investmentRoutes);
 
 // Handling unhandled routes
 app.all("*", (req, res, next) => {
