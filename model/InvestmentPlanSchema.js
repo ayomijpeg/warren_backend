@@ -9,16 +9,22 @@ const InvestmentPlanSchema = new mongoose.Schema({
       type: String,
    },
    ROI: {
-      type: Number,
+      type: String,
       required: true,
    }, // ROI percentage
    amount: {
       type: Number,
       required: true,
    },
+   access: {
+      type: String,
+      enum: ["locked", "open"],
+      default: "open",
+   },
    duration: {
       type: Number,
       required: true,
+      default: 30,
    }, // in days
 });
 
