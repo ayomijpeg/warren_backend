@@ -5,9 +5,6 @@ const InvestmentPlanSchema = new mongoose.Schema({
       type: String,
       required: true,
    },
-   description: {
-      type: String,
-   },
    ROI: {
       type: String,
       required: true,
