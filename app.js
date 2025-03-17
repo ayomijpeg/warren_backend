@@ -5,13 +5,14 @@ import mongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
 import helmet from "helmet";
 import cors from "cors";
-import hbs from "hbs";
 
 // Local Modules
 import ErrorHandler from "./utils/ErrorHandler.js";
 import AppError from "./utils/AppError.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import investmentRoutes from "./routes/investmentRoutes.js";
+import investmentPlanRoutes from "./routes/investmentPlanRoutes.js";
 
 const app = express();
 
@@ -29,8 +30,6 @@ app.use(
       limit: "1mb",
    })
 );
-app.use(express.static("Public"));
-app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
@@ -48,49 +47,11 @@ app.use(mongoSanitize());
 // Preventing parameter pollution
 app.use(hpp());
 
-// register default values for template
-hbs.registerHelper("default", function (value, defaultValue) {
-   return value || defaultValue;
-});
-
 // Route handlers
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
-
-app.get("/", (req, res) => {
-   res.render("index");
-});
-
-app.get("/dashboard", (req, res) => {
-   res.render("dashboard");
-});
-app.get("/admin/dashboard", (req, res) => {
-   res.render("admin-dashboard");
-});
-app.get("/admin", (req, res) => {
-   res.render("admin-login");
-});
-app.get("/confirm", (req, res) => {
-   res.render("confirm");
-});
-app.get("/invest", (req, res) => {
-   res.render("invest");
-});
-app.get("/login", (req, res) => {
-   res.render("login");
-});
-app.get("/payment", (req, res) => {
-   res.render("payment");
-});
-app.get("/profile", (req, res) => {
-   res.render("profile");
-});
-app.get("/signup", (req, res) => {
-   res.render("signup");
-});
-app.get("/transaction", (req, res) => {
-   res.render("transaction");
-});
+app.use("/plan", investmentPlanRoutes);
+app.use("/investment", investmentRoutes);
 
 // Handling unhandled routes
 app.all("*", (req, res, next) => {

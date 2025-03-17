@@ -5,24 +5,26 @@ const InvestmentPlanSchema = new mongoose.Schema({
       type: String,
       required: true,
    },
-   description: {
-      type: String,
-   },
    ROI: {
-      type: Number,
+      type: String,
       required: true,
    }, // ROI percentage
-   minAmount: {
+   amount: {
       type: Number,
       required: true,
    },
-   maxAmount: {
-      type: Number,
-      required: true,
+   access: {
+      type: String,
+      enum: ["locked", "open"],
+      default: "open",
    },
    duration: {
-    type: Number, required: true
-}, // in days
+      type: Number,
+      required: true,
+      default: 30,
+   }, // in days
 });
 
-module.exports = mongoose.model("InvestmentPlan", InvestmentPlanSchema);
+const InvestmentPlan = mongoose.model("InvestmentPlan", InvestmentPlanSchema);
+
+export default InvestmentPlan;
